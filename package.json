@@ -1,0 +1,20 @@
+{
+  "name": "onawait",
+  "version": "0.0.1",
+  "description": "Async wrapper to manage try...catch blocks.",
+  "license": "MIT",
+  "repository": "isaiahgrey93/onawait",
+  "main": "index.js",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "promises",
+    "async/await"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.4"
+  }
+}
