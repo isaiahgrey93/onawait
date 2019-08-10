@@ -1,11 +1,17 @@
-type AsyncAction = Promise<any> | ((...args: any[]) => Promise<AsyncResult>);
+type InferPromise<T> = T extends Promise<infer R> ? R : never;
 
-type AsyncResult = {
+type AsyncAction<T = any> =
+  | Promise<T>
+  | ((...args: T[]) => Promise<AsyncResult>);
+
+type AsyncResult<T = any> = {
   error?: any;
-  response?: any;
+  response?: InferPromise<AsyncAction<T>>;
 };
 
-export const onawait = (action: AsyncAction): Promise<AsyncResult> => {
+export function onawait<T extends Promise<any>>(
+  action: T
+): Promise<AsyncResult<T>> {
   return new Promise(async resolve => {
     try {
       const response = await action;
@@ -25,6 +31,6 @@ export const onawait = (action: AsyncAction): Promise<AsyncResult> => {
       return resolve(asyncError);
     }
   });
-};
+}
 
 export default onawait;
