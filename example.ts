@@ -1,7 +1,8 @@
-import on from "."; // "import on from 'onawait'"
+import on from '.';
+// "import on from 'onawait'"
 
 const hello = (name: string): Promise<string> => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => resolve(`Hello ${name}!`));
   });
 };
@@ -16,9 +17,20 @@ const hello = (name: string): Promise<string> => {
   }
 })();
 
-// with "onawait"
+// with "onawait" destructured array
 (async () => {
-  const { error, response: greeting } = await on(hello("Dave"));
+  const [error, response] = await on(hello("Dave"));
+
+  if (error) {
+    // handle error
+  }
+
+  // handle response
+})();
+
+// with "onawait" destructured object
+(async () => {
+  const { error, response } = await on(hello("Dave"));
 
   if (error) {
     // handle error
