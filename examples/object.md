@@ -1,5 +1,7 @@
-const on = require('../').default;
-// const { onawait } = require('../');
+```typescript
+const on = require('onawait/object').default;
+// or
+// const on from 'onawait/object'
 
 const getRandomResponse = () => {
   return Math.random() > 0.5
@@ -11,7 +13,7 @@ const getRandomResponse = () => {
     : new Error('An error response.');
 };
 
-// with try catch
+// with a regular try catch
 async function withoutOnAwait() {
   try {
     const response = await getRandomResponse();
@@ -23,21 +25,8 @@ async function withoutOnAwait() {
   }
 }
 
-async function withOnAwaitArrayDestructuring() {
-  // with "onawait" destructured array
-  const [error, response] = await on(getRandomResponse());
-
-  // handle error
-  if (error) {
-    return console.log({ error });
-  }
-
-  // handle response
-  console.log({ response });
-}
-
-async function withOnAwaitObjectDestructuring() {
-  // with "onawait" destructured object
+// with "onawait" destructured object
+async function withOnAwait() {
   const { error, response } = await on(getRandomResponse());
 
   // handle error
@@ -48,7 +37,4 @@ async function withOnAwaitObjectDestructuring() {
   // handle response
   console.log({ response });
 }
-
-withoutOnAwait();
-withOnAwaitArrayDestructuring();
-withOnAwaitObjectDestructuring();
+```
