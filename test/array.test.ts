@@ -8,6 +8,17 @@ const getAsyncError = () =>
 
 const getAsyncSuccess = () => new Promise(resolve => resolve(SUCCESS_MESSAGE));
 
+describe('when an error instance is passed as the sole argument', () => {
+  it('it should return an array with the index of 0 populated with an error instance', async () => {
+    const CUSTOM_ERROR = new Error(ERROR_MESSAGE);
+
+    const [error] = await on(CUSTOM_ERROR);
+
+    expect(error).toBe(CUSTOM_ERROR);
+    expect(error.message).toEqual(CUSTOM_ERROR.message);
+  });
+});
+
 describe('when a pending promise is rejected or an exception occurs within', () => {
   it('it should return an array with the index of 0 populated with an error instance', async () => {
     const [error] = await on(getAsyncError());
