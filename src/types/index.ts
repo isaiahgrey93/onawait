@@ -8,9 +8,6 @@ type AsyncObjectResult = {
   response?: AsyncResponseValue;
 };
 
-type AsyncArrayResult = [
-  error: AsyncErrorValue,
-  response: AsyncResponseValue
-];
+type AsyncArrayResult = { 0: AsyncErrorValue; 1: AsyncResponseValue }[];
 
 type AsyncResult = AsyncObjectResult | AsyncArrayResult;
